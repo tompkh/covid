@@ -25,10 +25,10 @@
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading"> <img src="{% static 'images/covidss-logo.png' %}" height=150> </div>
+      <div class="sidebar-heading"> <a href="{% url 'home'%}"><img src="{% static 'images/covidss-logo.png' %}" height=150></a> </div>
       <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action bg-light">About & Contact</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Assets</a>
+        <a href="{% url 'about' %}" class="list-group-item list-group-item-action bg-light">About & Contact</a>
+        <a href="{% url 'blog' %}" class="list-group-item list-group-item-action bg-light">Resources</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Blog</a>
       </div>
     </div>

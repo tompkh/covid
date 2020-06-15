@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -20,5 +21,8 @@ class Post(models.Model):
        default=STIGMA,
        )
 
+    def dateadded_pretty(self):
+        return self.dateadded.strftime('%B %e, %Y')
+
     def __str__(self):
-        return self.title, self.category
+        return self.title

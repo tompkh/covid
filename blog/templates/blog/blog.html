@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p class="pt-3">Resources related to :</p>
+
+{% for post in posts.all %}
+{{ post.dateadded_pretty }} - <a href="{% url 'detail' post.id %}"> {{ post.title }} </a><br>
+{% endfor %}
+{% endblock %}
