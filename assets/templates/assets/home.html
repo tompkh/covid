@@ -5,9 +5,12 @@
 <p class="pt-3">Find and download Covid-19 related resources here:</p>
 
 <br>
-<h1>Testing</h1>
+
+{% for post in posts.category %}
+
+<h3>
+<a href="#">Resources on {{ post.category }}</h3></a>
 <br>
-<h1>Quarantine</h1>
-<br>
-<h1>Stigma</h1>
+
+{% endfor %}
 {% endblock %}

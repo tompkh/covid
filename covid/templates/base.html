@@ -27,8 +27,9 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading"> <a href="{% url 'home'%}"><img src="{% static 'images/covidss-logo.png' %}" height=150></a> </div>
       <div class="list-group list-group-flush">
+        <a href="{% url 'home' %}" class="list-group-item list-group-item-action bg-light">Homepage</a>
         <a href="{% url 'about' %}" class="list-group-item list-group-item-action bg-light">About & Contact</a>
-        <a href="{% url 'assets' %}" class="list-group-item list-group-item-action bg-light">Resources</a>
+        <a href="{% url 'assets' %}" class="list-group-item list-group-item-action bg-light">All resources</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Blog</a>
       </div>
     </div>
@@ -37,22 +38,35 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-    <!-- THIS IS A MENU ON THE TOP, WITH A BUTTON TO TOGGLE ON/OFF THE SIDEMENU
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <!--TOGGLE BUTTON TO HIDE MENU
         <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
+      -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            {% if user.is_authenticated %}
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}" onclick="">Logout <span class="sr-only">(current)</span></a>
+              <form id="logout" action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" />
+              </form>
             </li>
+            {% else %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'login' %}">Team Login <span class="sr-only">(current)</span></a>
+            </li>
+            <!-- SIGNUP BUTTON
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="{% url 'signup' %}">Signup</a>
             </li>
+          -->
+            {% endif %}
+            <!-- A DROPDOWN MENU
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Dropdown
@@ -64,10 +78,11 @@
                 <a class="dropdown-item" href="#">Something else here</a>
               </div>
             </li>
+          -->
           </ul>
         </div>
       </nav>
-    -->
+
       <div class="container-fluid">
         {% block content %}
 

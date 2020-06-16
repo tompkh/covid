@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
+  <h2 class="pt-3">All available resources:</h2>
 
-<p class="pt-3">Resources related to :</p>
+{% for post in posts.all reversed %}
+<li>
+{{ post.dateadded_pretty }} - {{ value|filesizeformat }} - <a href="{% url 'detail' post.id %}"> {{ post.title }} </a><br>
+</li>{% endfor %}
 
-{% for post in posts.all %}
-{{ post.dateadded_pretty }} - <a href="{% url 'detail' post.id %}"> {{ post.title }} </a><br>
-{% endfor %}
+</div>
+
 {% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+hello - trying to filter the assets per category
+so, when clicking on a category name on homepage, that should
+come to this filter view and display only the relevant assets
+
+
+<div class="container">
+  <p class="pt-3">Resources related to {whatever the person clicked on} :</p>
+
+  {% for post in posts.all reversed %}
+  {% if category == "Quarantine related" %}
+  <li>
+  {{ post.dateadded_pretty }} - {{ value|filesizeformat }} - <a href="{% url 'detail' post.id %}"> {{ post.title }} </a><br>
+  </li>
+  {% endif %}
+  {% endfor %}
+
+</div>
+
+{% endblock %}
