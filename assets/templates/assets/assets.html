@@ -6,7 +6,7 @@
 
 {% for post in posts.all reversed %}
 <li>
-{{ post.dateadded_pretty }} - {{ value|filesizeformat }} - <a href="{% url 'detail' post.id %}"> {{ post.title }} </a><br>
+{{ post.dateadded_pretty }} - {{ post.file.value|filesizeformat }} - <a href="{% url 'detail' post.id %}"> {{ post.title }}</a> - Category: {{ post.category }}<br>
 </li>{% endfor %}
 
 </div>

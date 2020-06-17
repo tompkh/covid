@@ -11,10 +11,13 @@ come to this filter view and display only the relevant assets
   <p class="pt-3">Resources related to {whatever the person clicked on} :</p>
 
   {% for post in posts.all reversed %}
-  {% if category == "Quarantine related" %}
+
+  {% if category == "quarantine" %}
+
   <li>
   {{ post.dateadded_pretty }} - {{ value|filesizeformat }} - <a href="{% url 'detail' post.id %}"> {{ post.title }} </a><br>
   </li>
+
   {% endif %}
   {% endfor %}
 

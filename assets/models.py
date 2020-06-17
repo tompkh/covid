@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -7,19 +8,20 @@ class Post(models.Model):
     file = models.FileField(upload_to='images/')
     dateadded = models.DateField(auto_now=True)
 
-    QUARANTINE = 'quarantine'
-    STIGMA = 'stigma'
-    TESTING = 'testing'
-    CATEGORY = [
-        (QUARANTINE, ('Quarantine related')),
-        (STIGMA, ('Stigma related')),
-        (TESTING, ('Testing related')),
-        ]
+    CATEGORY = (
+        ('QUARANTINE', 'Quarantine related'),
+        ('STIGMA', 'Stigma related'),
+        ('TESTING', 'Testing related'),
+    )
     category = models.CharField(
        max_length=32,
        choices=CATEGORY,
-       default=STIGMA,
+       default='STIGMA',
        )
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+
+    class Meta:
+        ordering = ['-dateadded']
 
     def dateadded_pretty(self):
         return self.dateadded.strftime('%B %e, %Y')

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+{{ error }}
+<br>
+<br>
+{% endif %}
+
+<h3>Add a resource to the list</h3>
+<form action="{% url 'create' %}" enctype="multipart/form-data" method="POST">
+{% csrf_token %}
+Title:
+<br>
+<input type="text" name="title" />
+<br>
+Description:
+<br>
+<input type="textbox" name="description" />
+<br>
+Category:
+<br>
+{{ post.get_category_display }}
+<!--
+<select id="category" name="category">
+  <option value="quarantine">Quarantine</option>
+  <option value="testing">Testing</option>
+  <option value="stigma">Stigma</option>
+</select>
+-->
+<br>
+File:
+<br>
+<input type="file" name="file" />
+<br>
+<br>
+<input class="btn btn-primary" type="submit" name="addresourcebutton" value="Add resource">
+
+</form>
+
+{% endblock %}

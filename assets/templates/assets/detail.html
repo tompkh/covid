@@ -3,9 +3,13 @@
 {% block content %}
 <div class="container">
 
-<h1 class=pt-3>{{ post.title }}</h1>{{ post.title }}
+<h1 class=pt-3>{{ post.title }}</h1>
+<p>This resource is related to <strong>{{ post.category }}</strong></p>
+{{ post.description }}
+<br>
 <br>
 <embed class="img-fluid" src="{{ post.file.url }}" type="application/pdf" class="responsive" />
-
+<br>
+<p style="font-size:12px">Uploaded by {{ post.user.username }} on {{ post.dateadded_pretty }}</p>
 </div>
 {% endblock %}

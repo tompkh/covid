@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, TemplateView
+from django.contrib.auth.decorators import login_required
 from .models import Post
+from django.utils import timezone
 
 def home(request):
     posts = Post.objects
@@ -31,3 +33,22 @@ class Category(ListView):
     # Add in the publisher
         context['category'] = self.category
         return context
+
+@login_required
+def create(request):
+    if request.method == 'POST':
+        if request.POST['title'] and request.POST['description'] and request.POST['category'] and request.FILES['file']:
+            post = Post()
+            post.title = request.POST['title']
+            post.description = request.POST['description']
+            post.category = request.POST['category']
+            post.file = request.FILES['file']
+            post.dateadded = timezone.datetime.now
+            post.user = request.user
+            post.save()
+            return redirect('/assets/' + str(product.id))
+        else:
+            return render(request, 'assets/create.html',{'error':'All fields are required!'})
+
+    else:
+        return render(request, 'assets/create.html')
